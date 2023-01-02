@@ -16,3 +16,10 @@ after_success:
   - docker build -t jpbodiong/multi-nginx ./nginx
   - docker build -t jpbodiong/multi-server ./server
   - docker build -t jpbodiong/multi-worker ./worker
+  # Log in to the docker CLI
+  echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push jpbodiong/multi-client
+  - docker push jpbodiong/multi-nginx
+  - docker push jpbodiong/multi-server
+  - docker push jpbodiong/multi-worker
